@@ -20,3 +20,5 @@ jobs:
             git pull
             composer install --no-dev --optimize-autoloader
             php bin/console d:m:m -n
+            npm install
+            npm run build
