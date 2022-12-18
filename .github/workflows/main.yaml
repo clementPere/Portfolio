@@ -23,7 +23,7 @@ jobs:
 
       - name: SFTP Deploy
         env:
-        SSH_PORT: ${{ secrets.SSH_PORT }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
         uses: appleboy/ssh-action@master
         with:
           username: ${{ secrets.SSH_USERNAME }}
