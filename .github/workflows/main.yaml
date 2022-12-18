@@ -1,39 +1,21 @@
 name: CI-SFTP
-
-# Controls when the action will run.
 on:
-  # Triggers the workflow on push or pull request events but only for the main branch
   push:
     branches: [master]
-  #  pull_request:
-  #    branches: [ main ]
-
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "SFTP"
   deploy-via-sftp:
     runs-on: ubuntu-latest
-    env:
-      SSH_PORT: ${{ secrets.SSH_PORT }}
-      SSH_USERNAME: ${{ secrets.SSH_USERNAME }}
-      SSH_SERVER: ${{ secrets.SSH_SERVER }}
-      SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-
       - name: SFTP Deploy
         uses: appleboy/ssh-action@master
         with:
-          username: ${{ env.SSH_USERNAME }}
-          host: ${{ env.SSH_SERVER }}
-          port: ${{ env.SSH_PORT }}
-          key: ${{ env.SSH_PRIVATE_KEY }}
+          username: ${{ secrets.SSH_USERNAME }}
+          host: ${{ secrets.SSH_SERVER }}
+          port: ${{ secrets.SSH_PORT }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            echo "echo "Hello g ${{ env.SSH_PORT }}""
             cd ${{ secrets.REMOTE_PATH }}
             git pull
             composer install --no-dev --optimize-autoloader
