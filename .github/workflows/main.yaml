@@ -33,6 +33,7 @@ jobs:
           port: ${{ env.SSH_PORT }}
           key: ${{ env.SSH_PRIVATE_KEY }}
           script: |
+            echo "echo "Hello g ${{ env.SSH_PORT }}""
             cd ${{ secrets.REMOTE_PATH }}
             git pull
             composer install --no-dev --optimize-autoloader
