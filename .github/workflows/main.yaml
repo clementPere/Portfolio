@@ -16,6 +16,8 @@ jobs:
   # This workflow contains a single job called "SFTP"
   deploy-via-sftp:
     runs-on: ubuntu-latest
+    env:
+      SSH_PORT: ${{ secrets.SSH_PORT }}
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
