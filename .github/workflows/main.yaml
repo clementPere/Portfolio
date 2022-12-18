@@ -18,6 +18,9 @@ jobs:
     runs-on: ubuntu-latest
     env:
       SSH_PORT: ${{ secrets.SSH_PORT }}
+      SSH_USERNAME: ${{ secrets.SSH_USERNAME }}
+      SSH_SERVER: ${{ secrets.SSH_SERVER }}
+      SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
@@ -25,10 +28,10 @@ jobs:
       - name: SFTP Deploy
         uses: appleboy/ssh-action@master
         with:
-          username: ${{ secrets.SSH_USERNAME }}
-          host: ${{ secrets.SSH_SERVER }}
+          username: ${{ env.SSH_USERNAME }}
+          host: ${{ env.SSH_SERVER }}
           port: ${{ env.SSH_PORT }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          key: ${{ env.SSH_PRIVATE_KEY }}
           script: |
             cd ${{ secrets.REMOTE_PATH }}
             git pull
