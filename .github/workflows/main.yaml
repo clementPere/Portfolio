@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: SFTP Deploy
-        uses: appleboy/ssh-action@master
+        uses: appleboy/ssh-action@v0.1.4
         with:
           username: ${{ secrets.SSH_USERNAME }}
           host: ${{ secrets.SSH_SERVER }}
